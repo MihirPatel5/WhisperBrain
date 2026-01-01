@@ -1,0 +1,30 @@
+{
+  "audio": {
+    "sample_rate": 16000,
+    "quality": "medium",
+    "format": "wav"
+  },
+  "ui": {
+    "theme": "dark",
+    "language": "en",
+    "animations": true
+  },
+  "llm": {
+    "default_model": "phi3:mini",
+    "temperature": 0.7,
+    "max_tokens": 1000
+  },
+  "features": {
+    "vad_enabled": true,
+    "emotion_detection": true,
+    "translation": false,
+    "rag_enabled": false,
+    "tools_enabled": false
+  },
+  "connection": {
+    "auto_reconnect": true,
+    "reconnect_delay": 3,
+    "max_retries": 5
+  },
+  "updated_at": "2026-01-01T09:43:08.601762"
+}

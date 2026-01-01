@@ -1,0 +1,56 @@
+{
+  "conversations": 1,
+  "total_messages": 5,
+  "total_audio_processed": 0,
+  "errors": 0,
+  "average_response_time": 1.5,
+  "sessions": 1,
+  "active_users": [
+    "test_user"
+  ],
+  "error_log": [],
+  "performance_log": [
+    {
+      "timestamp": "2025-12-31T17:16:56.998519",
+      "operation": "llm",
+      "duration": 14.62046504020691,
+      "session_id": "c7b1a041-cab1-4d4d-86da-12617c227a7e"
+    },
+    {
+      "timestamp": "2025-12-31T17:17:59.196967",
+      "operation": "llm",
+      "duration": 17.592816591262817,
+      "session_id": "c7b1a041-cab1-4d4d-86da-12617c227a7e"
+    },
+    {
+      "timestamp": "2025-12-31T17:21:18.045812",
+      "operation": "llm",
+      "duration": 5.5532448291778564,
+      "session_id": "f9471992-4a14-48d1-ac5a-74b562d0bb2e"
+    },
+    {
+      "timestamp": "2025-12-31T17:29:07.697278",
+      "operation": "llm",
+      "duration": 13.541982173919678,
+      "session_id": "f9471992-4a14-48d1-ac5a-74b562d0bb2e"
+    },
+    {
+      "timestamp": "2025-12-31T17:30:07.032977",
+      "operation": "llm",
+      "duration": 9.420625925064087,
+      "session_id": "f9471992-4a14-48d1-ac5a-74b562d0bb2e"
+    },
+    {
+      "timestamp": "2025-12-31T17:53:35.050062",
+      "operation": "llm",
+      "duration": 26.44927406311035,
+      "session_id": "b3d23ff4-ff00-4458-8806-80d15b3fd8bf"
+    },
+    {
+      "timestamp": "2025-12-31T17:54:26.966383",
+      "operation": "llm",
+      "duration": 13.151349782943726,
+      "session_id": "b3d23ff4-ff00-4458-8806-80d15b3fd8bf"
+    }
+  ]
+}

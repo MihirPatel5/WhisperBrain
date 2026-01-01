@@ -1,0 +1,14 @@
+{
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Hello"
+    },
+    {
+      "role": "assistant",
+      "content": "Hi there!"
+    }
+  ],
+  "exported_at": "2025-12-31T16:58:14.373177",
+  "message_count": 2
+}
