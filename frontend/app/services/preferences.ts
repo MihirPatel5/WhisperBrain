@@ -49,10 +49,13 @@ export class PreferencesService {
     const stored = localStorage.getItem(PREFERENCES_KEY);
     if (stored) {
       try {
-        this.preferences = JSON.parse(stored);
-        // Sync with server in background
-        this.syncWithServer().catch(console.error);
-        return this.preferences;
+        const parsed = JSON.parse(stored) as UserPreferences;
+        if (parsed) {
+          this.preferences = parsed;
+          // Sync with server in background
+          this.syncWithServer().catch(console.error);
+          return parsed;
+        }
       } catch (e) {
         console.warn('Failed to parse stored preferences', e);
       }
@@ -60,14 +63,21 @@ export class PreferencesService {
 
     // Load from server
     try {
-      this.preferences = await ApiService.getPreferences();
-      this.saveToLocalStorage();
-      return this.preferences;
+      const serverPrefs = await ApiService.getPreferences();
+      if (serverPrefs) {
+        this.preferences = serverPrefs;
+        this.saveToLocalStorage();
+        return serverPrefs;
+      }
     } catch (e) {
       console.error('Failed to load preferences from server', e);
-      // Return defaults
-      return this.getDefaultPreferences();
     }
+    
+    // Return defaults if all else fails
+    const defaults = this.getDefaultPreferences();
+    this.preferences = defaults;
+    this.saveToLocalStorage();
+    return defaults;
   }
 
   /**
@@ -139,15 +149,21 @@ export class PreferencesService {
    */
   static async resetPreferences(): Promise<UserPreferences> {
     try {
-      this.preferences = await ApiService.resetPreferences();
-      this.saveToLocalStorage();
-      return this.preferences;
+      const resetPrefs = await ApiService.resetPreferences();
+      if (resetPrefs) {
+        this.preferences = resetPrefs;
+        this.saveToLocalStorage();
+        return resetPrefs;
+      }
     } catch (e) {
       console.error('Failed to reset preferences', e);
-      this.preferences = this.getDefaultPreferences();
-      this.saveToLocalStorage();
-      return this.preferences;
     }
+    
+    // Fallback to defaults
+    const defaults = this.getDefaultPreferences();
+    this.preferences = defaults;
+    this.saveToLocalStorage();
+    return defaults;
   }
 
   /**

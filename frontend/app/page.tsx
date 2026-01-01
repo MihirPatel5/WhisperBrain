@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import styles from './page.module.css'
 import { VoiceActivityDetector } from './utils/vad'
 import { PreferencesService, UserPreferences } from './services/preferences'
+import { ApiService } from './services/api'
 
 export default function Home() {
   const [isRecording, setIsRecording] = useState(false)
@@ -374,6 +375,44 @@ export default function Home() {
       stopRecording()
     } else {
       startRecording()
+    }
+  }
+
+  const handleExportConversation = async (format: 'json' | 'text' | 'markdown') => {
+    if (!sessionId || conversationHistory.length === 0) {
+      setError('No conversation to export')
+      return
+    }
+
+    try {
+      setStatus('Exporting conversation...')
+      const result = await ApiService.exportConversation(sessionId, conversationHistory, format)
+      
+      // Handle response - backend returns { content, filename, ... }
+      const content = result.content || JSON.stringify(result, null, 2)
+      const filename = result.filename || `conversation_${Date.now()}.${format === 'json' ? 'json' : format === 'markdown' ? 'md' : 'txt'}`
+      
+      // Create download link
+      const blob = new Blob([content], {
+        type: format === 'json' ? 'application/json' : format === 'markdown' ? 'text/markdown' : 'text/plain'
+      })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+      
+      setStatus('Export completed')
+      setTimeout(() => {
+        setStatus(isConnected ? 'Connected' : 'Disconnected')
+      }, 2000)
+    } catch (err: any) {
+      console.error('Export error:', err)
+      setError(`Export failed: ${err.message || 'Unknown error'}`)
+      setStatus(isConnected ? 'Connected' : 'Disconnected')
     }
   }
 
