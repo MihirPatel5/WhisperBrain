@@ -1,6 +1,31 @@
-fastapi
-uvicorn[standard]
-websockets
-python-multipart
-requests
+# Core FastAPI and WebSocket
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+python-multipart>=0.0.6
 
+# HTTP Requests
+requests>=2.31.0
+
+# Audio Processing
+numpy>=1.24.0
+scipy>=1.11.0
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# Machine Learning (for emotion detection, VAD, etc.)
+scikit-learn>=1.3.0
+
+# Data Processing
+pandas>=2.0.0
+
+# Date/Time
+python-dateutil>=2.8.2
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# Optional: For advanced features (uncomment if needed)
+# torch>=2.0.0  # For deep learning models
+# transformers>=4.30.0  # For NLP models
+# googletrans>=4.0.0  # For translation (if using)
